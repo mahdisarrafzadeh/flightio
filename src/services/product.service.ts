@@ -2,7 +2,7 @@ import axiosBase from "./api";
 
 class TutorialDataService {
   getAll() {
-    return axiosBase.get("/tutorials");
+    return axiosBase.get("/products");
   }
 
   getById(id: string) {
@@ -10,7 +10,7 @@ class TutorialDataService {
   }
 
   create(data: any) {
-    return axiosBase.post("/tutorials", data);
+    return axiosBase.post("/products", data);
   }
 }
 

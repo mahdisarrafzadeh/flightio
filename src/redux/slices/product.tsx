@@ -1,14 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import ProductDataService from "../../services/product.service";
-
-export interface ProductInitialState {
-  product?: any[]; // data stored from API
-  status: "idle" | "loading" | "succeeded" | "failed";
-  error?: string; // current active car tab index
-}
+import { RootState } from "../store";
+import { ProductInitialState } from "@/interfaces/product.interfaces";
 
 const initialState: ProductInitialState = {
-  product: [],
+  products: [],
   status: "idle",
   error: undefined,
 };
@@ -34,7 +30,7 @@ const productSlice = createSlice({
       })
       .addCase(retrieveTutorials.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.product = action.payload;
+        state.products = action.payload;
       })
       .addCase(retrieveTutorials.rejected, (state, action) => {
         state.status = "failed";
@@ -43,4 +39,6 @@ const productSlice = createSlice({
   },
 });
 
-export default productSlice;
+export const selectProduct = (state: RootState) => state.products;
+
+export default productSlice.reducer;
