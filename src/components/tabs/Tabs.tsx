@@ -21,9 +21,9 @@ const Tabs: FC<Props> = ({ items, activeKey, setActiveKey }) => {
         >
           <span
             className={classNames(
-              "text-[#757575]  leading-8 text-sm font-normal",
+              "text-default-gray  leading-8 text-sm font-normal",
               {
-                " text-[#1A43D3] leading-8 text-sm font-bold":
+                " text-default-blue leading-8 text-sm font-bold":
                   activeKey === item,
               }
             )}

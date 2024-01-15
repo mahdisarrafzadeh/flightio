@@ -23,7 +23,9 @@ const Header: React.FC = () => {
           height={24}
           priority
         />
-        <span className="text-[#757575] font-normal pr-1">{string.name}</span>
+        <span className="text-default-blue font-normal pr-1">
+          {string.name}
+        </span>
       </section>
     </header>
   );
