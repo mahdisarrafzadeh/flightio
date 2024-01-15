@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/header";
 import localFont from "next/font/local";
+import StoreProvider from "./StoreProvider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -36,10 +37,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" dir="rtl">
-      <body className={shabnam.className}>
-        <Header />
-        {children}
-      </body>
+      <StoreProvider>
+        <body className={shabnam.className}>
+          <Header />
+          {children}
+        </body>
+      </StoreProvider>
     </html>
   );
 }
