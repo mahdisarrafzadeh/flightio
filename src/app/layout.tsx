@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Header from "../components/header";
+import Header from "@/components/header";
 import localFont from "next/font/local";
 
 export const metadata: Metadata = {
@@ -35,7 +35,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" dir="rtl">
       <body className={shabnam.className}>
         <Header />
         {children}
