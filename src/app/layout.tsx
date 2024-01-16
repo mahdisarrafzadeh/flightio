@@ -41,8 +41,7 @@ export default function RootLayout({
       <StoreProvider>
         <AntdRegistry>
           <body className={shabnam.className}>
-            <Header />
-            {children}
+            <Header /> <div className="py-10 px-[60px]">{children}</div>
           </body>
         </AntdRegistry>
       </StoreProvider>

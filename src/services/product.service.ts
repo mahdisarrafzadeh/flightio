@@ -5,8 +5,8 @@ class TutorialDataService {
     return axiosBase.get("/products");
   }
 
-  getById(id: string) {
-    return axiosBase.get(`/tutorials/${id}`);
+  getById(id: number) {
+    return axiosBase.get(`/products/${id}`);
   }
 
   create(data: any) {

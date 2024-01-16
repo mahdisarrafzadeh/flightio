@@ -5,14 +5,23 @@ import { ProductInitialState } from "@/interfaces/product.interfaces";
 
 const initialState: ProductInitialState = {
   products: [],
+  productDetail: undefined,
   status: "idle",
   error: undefined,
 };
 
-export const retrieveTutorials = createAsyncThunk(
-  "tutorials/retrieve",
+export const retrieveProducts = createAsyncThunk(
+  "products/retrieve",
   async () => {
     const res = await ProductDataService.getAll();
+    return res.data;
+  }
+);
+
+export const retrieveProductById = createAsyncThunk(
+  "productDetail/retrieve",
+  async (id: number) => {
+    const res = await ProductDataService.getById(id);
     return res.data;
   }
 );
@@ -25,16 +34,24 @@ const productSlice = createSlice({
   },
   extraReducers(builder) {
     builder
-      .addCase(retrieveTutorials.pending, (state, action) => {
+      .addCase(retrieveProducts.pending, (state, action) => {
         state.status = "loading";
       })
-      .addCase(retrieveTutorials.fulfilled, (state, action) => {
+      .addCase(retrieveProducts.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.products = action.payload;
       })
-      .addCase(retrieveTutorials.rejected, (state, action) => {
+      .addCase(retrieveProducts.rejected, (state, action) => {
         state.status = "failed";
         state.error = action?.error?.message;
+      })
+      .addCase(retrieveProductById.pending, (state, action) => {
+        state.status = "loading";
+        state.productDetail = undefined;
+      })
+      .addCase(retrieveProductById.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.productDetail = action.payload;
       });
   },
 });

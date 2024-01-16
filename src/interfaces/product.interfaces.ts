@@ -14,5 +14,6 @@ export interface Product {
 export interface ProductInitialState {
   products?: Product[]; // data stored from API
   status: "idle" | "loading" | "succeeded" | "failed";
+  productDetail?: Product;
   error?: string; // current active car tab index
 }
