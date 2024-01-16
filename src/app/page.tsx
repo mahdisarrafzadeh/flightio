@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { retrieveTutorials, selectProduct } from "@/redux/slices/product";
 import Image from "next/image";
+import { Card, Row, Col, Typography } from "antd";
 
 const tabItems = ["ارزان‌ترین", "گران‌‌ترین"];
 
@@ -26,30 +27,39 @@ export default function Home() {
           activeKey={activeKey}
         />
       </section>
-      <section className="mt-[25px] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-        {products?.map((item) => (
-          <div
-            key={item.id}
-            className="text-left max-w-sm rounded-lg  bg-white border-1 border-[#E0E0E0] border-solid"
-          >
-            <div className="w-full h-[250px]  flex justify-center ">
-              <Image
-                src={item.image || ""}
-                alt={item.title || ""}
-                width={213}
-                height={240}
-                className="w-[213px] h-[240px] object-contain pt-6 pb-[26px] px-[50px]"
-              />
-            </div>
-            <div className="grid grid-rows-4">
-              <div className="font-bold text-base ">{item.title}</div>{" "}
-              <div className="flex justify-between items-center">
-                <span>{item.rating?.rate}</span>
-                <span>{item.price}تومان</span>
-              </div>
-            </div>
-          </div>
-        ))}
+      <section className="w-full">
+        <Row gutter={[20, 20]}>
+          {products?.map((item) => (
+            <Col key={item.id} xs={24} sm={24} md={12} lg={8} xl={6}>
+              <Card
+                className="text-left rounded-lg  bg-white border-1 border-[#E0E0E0] border-solid "
+                cover={
+                  <Image
+                    src={item.image || ""}
+                    alt={item.title || ""}
+                    width={213}
+                    height={240}
+                    className="w-[213px] h-[240px] object-contain pt-6 pb-[26px] px-[50px]"
+                  />
+                }
+                bodyStyle={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  flexDirection: "column",
+                  minHeight: "180px",
+                }}
+              >
+                <Typography.Text className="font-bold text-base overflow-hidden ">
+                  {item.title}
+                </Typography.Text>
+                <div className="flex justify-between items-center">
+                  <span>{item.rating?.rate}</span>
+                  <span>{item.price}تومان</span>
+                </div>
+              </Card>
+            </Col>
+          ))}
+        </Row>
       </section>
     </main>
   );
