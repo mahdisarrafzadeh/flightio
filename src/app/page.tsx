@@ -4,6 +4,7 @@ import Tabs from "@/components/tabs";
 import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { retrieveTutorials, selectProduct } from "@/redux/slices/product";
+import Image from "next/image";
 
 const tabItems = ["ارزان‌ترین", "گران‌‌ترین"];
 
@@ -25,26 +26,27 @@ export default function Home() {
           activeKey={activeKey}
         />
       </section>
-      <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+      <section className="mt-[25px] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
         {products?.map((item) => (
           <div
             key={item.id}
-            className="max-w-sm rounded overflow-hidden shadow-lg"
+            className="text-left max-w-sm rounded-lg  bg-white border-1 border-[#E0E0E0] border-solid"
           >
-            <div className="px-6 py-4">
-              <div className="font-bold text-xl mb-2">{item.title}</div>
-              <p className="text-gray-700 text-base">{item.description}</p>
+            <div className="w-full h-[250px]  flex justify-center ">
+              <Image
+                src={item.image || ""}
+                alt={item.title || ""}
+                width={213}
+                height={240}
+                className="w-[213px] h-[240px] object-contain pt-6 pb-[26px] px-[50px]"
+              />
             </div>
-            <div className="px-6 pt-4 pb-2">
-              <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                #photography
-              </span>
-              <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                #travel
-              </span>
-              <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                #winter
-              </span>
+            <div className="grid grid-rows-4">
+              <div className="font-bold text-base ">{item.title}</div>{" "}
+              <div className="flex justify-between items-center">
+                <span>{item.rating?.rate}</span>
+                <span>{item.price}تومان</span>
+              </div>
             </div>
           </div>
         ))}
