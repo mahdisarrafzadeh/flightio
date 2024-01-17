@@ -7,7 +7,6 @@ import { useRouter } from "next/navigation";
 import React, { FC, useEffect } from "react";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import Input from "../Input";
-import { useDispatch } from "react-redux";
 import { updateProduct } from "@/redux/slices/product";
 import { useAppDispatch } from "@/hooks";
 

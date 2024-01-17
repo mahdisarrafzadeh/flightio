@@ -2,7 +2,7 @@
 
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { retrieveProductById, selectProduct } from "@/redux/slices/product";
-import React, { useEffect, FC, useMemo } from "react";
+import React, { useEffect, FC } from "react";
 import { Card, Row, Col, Typography, Flex, Space, Divider } from "antd";
 import Image from "next/image";
 import Confirm from "@/components/confirm/Confirm";
