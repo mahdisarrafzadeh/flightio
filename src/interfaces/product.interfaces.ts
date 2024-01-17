@@ -11,6 +11,14 @@ export interface Product {
   };
 }
 
+export interface IFormInput {
+  id: number;
+  title?: string;
+  price?: number;
+  count?: number;
+  description?: string;
+}
+
 export interface ProductInitialState {
   products?: Product[]; // data stored from API
   status: "idle" | "loading" | "succeeded" | "failed";

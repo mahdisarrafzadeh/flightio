@@ -1,7 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import ProductDataService from "../../services/product.service";
 import { RootState } from "../store";
-import { ProductInitialState } from "@/interfaces/product.interfaces";
+import {
+  IFormInput,
+  ProductInitialState,
+} from "@/interfaces/product.interfaces";
 
 const initialState: ProductInitialState = {
   products: [],
@@ -31,6 +34,14 @@ export const deleteProductById = createAsyncThunk(
   "products/delete",
   async (id: number) => {
     const res = await ProductDataService.delete(id);
+    return res.data;
+  }
+);
+
+export const updateProduct = createAsyncThunk(
+  "products/update",
+  async (data: IFormInput) => {
+    const res = await ProductDataService.update(data);
     return res.data;
   }
 );
@@ -73,6 +84,12 @@ const productSlice = createSlice({
         state.deleteLoading = false;
       })
       .addCase(deleteProductById.rejected, (state, action) => {
+        state.deleteLoading = false;
+      })
+      .addCase(updateProduct.fulfilled, (state, action) => {
+        state.deleteLoading = false;
+      })
+      .addCase(updateProduct.rejected, (state, action) => {
         state.deleteLoading = false;
       });
   },

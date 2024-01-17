@@ -1,6 +1,7 @@
+import { IFormInput } from "@/interfaces/product.interfaces";
 import axiosBase from "./api";
 
-class TutorialDataService {
+class ProductDataService {
   getAll() {
     return axiosBase.get("/products");
   }
@@ -12,6 +13,11 @@ class TutorialDataService {
   delete(id: number) {
     return axiosBase.delete(`/products/${id}`);
   }
+  update(data: IFormInput) {
+    return axiosBase.patch(`/products/${data.id}`, {
+      data,
+    });
+  }
 }
 
-export default new TutorialDataService();
+export default new ProductDataService();

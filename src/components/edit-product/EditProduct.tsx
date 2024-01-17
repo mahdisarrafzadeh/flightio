@@ -1,23 +1,19 @@
 "use client";
 
-import { Product } from "@/interfaces/product.interfaces";
+import { IFormInput, Product } from "@/interfaces/product.interfaces";
 import { Space } from "antd";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import React, { FC, useEffect } from "react";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import Input from "../Input";
+import { useDispatch } from "react-redux";
+import { updateProduct } from "@/redux/slices/product";
+import { useAppDispatch } from "@/hooks";
 
 type Props = {
   productDetail?: Product;
 };
-
-interface IFormInput {
-  title: string;
-  price: number;
-  count: number;
-  description: string;
-}
 
 const string = {
   title: "ویرایش محصول",
@@ -30,6 +26,7 @@ const string = {
 const EditProduct: FC<Props> = ({ productDetail }) => {
   const { control, setValue, reset, handleSubmit } = useForm({
     defaultValues: {
+      id: 1,
       title: "",
       price: 0,
       count: 0,
@@ -41,27 +38,26 @@ const EditProduct: FC<Props> = ({ productDetail }) => {
   const edit = searchParams.get("edit");
   const pathname = usePathname();
   const router = useRouter();
-
-  const handleOk = () => {
-    router.push("/");
-  };
+  const dispatch = useAppDispatch();
 
   const handleCancel = () => {
     router.push(pathname);
+    reset();
+  };
+
+  const onSubmit: SubmitHandler<IFormInput> = (data) => {
+    dispatch(updateProduct(data));
   };
 
   useEffect(() => {
     if (productDetail) {
-      setValue("title", productDetail?.title || ""),
+      setValue("id", productDetail?.id),
+        setValue("title", productDetail?.title || ""),
         setValue("price", productDetail?.price || 0);
       setValue("count", productDetail?.rating?.count || 0);
       setValue("description", productDetail?.description || "");
     } else reset();
   }, [productDetail]); //eslint-disable-line
-
-  const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    console.log(data);
-  };
 
   return (
     <>
