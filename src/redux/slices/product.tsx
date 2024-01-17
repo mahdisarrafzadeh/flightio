@@ -8,6 +8,7 @@ const initialState: ProductInitialState = {
   productDetail: undefined,
   status: "idle",
   error: undefined,
+  deleteLoading: false,
 };
 
 export const retrieveProducts = createAsyncThunk(
@@ -19,9 +20,17 @@ export const retrieveProducts = createAsyncThunk(
 );
 
 export const retrieveProductById = createAsyncThunk(
-  "productDetail/retrieve",
+  "products/retrieveProductById",
   async (id: number) => {
     const res = await ProductDataService.getById(id);
+    return res.data;
+  }
+);
+
+export const deleteProductById = createAsyncThunk(
+  "products/delete",
+  async (id: number) => {
+    const res = await ProductDataService.delete(id);
     return res.data;
   }
 );
@@ -52,6 +61,19 @@ const productSlice = createSlice({
       .addCase(retrieveProductById.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.productDetail = action.payload;
+      })
+      .addCase(retrieveProductById.rejected, (state, action) => {
+        state.status = "failed";
+      })
+      .addCase(deleteProductById.pending, (state, action) => {
+        state.deleteLoading = true;
+        state.productDetail = undefined;
+      })
+      .addCase(deleteProductById.fulfilled, (state, action) => {
+        state.deleteLoading = false;
+      })
+      .addCase(deleteProductById.rejected, (state, action) => {
+        state.deleteLoading = false;
       });
   },
 });

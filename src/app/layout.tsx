@@ -17,7 +17,6 @@ const shabnam = localFont({
       weight: "400",
       style: "light",
     },
-
     {
       path: "../fonts/Shabnam-Medium-FD.woff2",
       weight: "500",

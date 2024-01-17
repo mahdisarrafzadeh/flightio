@@ -14,6 +14,7 @@ const Header: React.FC = () => {
         width={100}
         height={24}
         priority
+        className="object-cover w-auto h-auto"
       />
       <section className="flex flex-row px-[20px] py-2 border-solid border-[1px] rounded-[50px] cursor-pointer ">
         <Image

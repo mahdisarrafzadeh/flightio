@@ -9,8 +9,8 @@ class TutorialDataService {
     return axiosBase.get(`/products/${id}`);
   }
 
-  create(data: any) {
-    return axiosBase.post("/products", data);
+  delete(id: number) {
+    return axiosBase.delete(`/products/${id}`);
   }
 }
 
