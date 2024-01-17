@@ -2,8 +2,7 @@
 
 import { useAppDispatch } from "@/hooks";
 import { deleteProductById } from "@/redux/slices/product";
-import { Flex, Modal, Space } from "antd";
-import Link from "next/link";
+import { Space } from "antd";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import React, { FC } from "react";
