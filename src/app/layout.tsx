@@ -3,7 +3,6 @@ import "./globals.css";
 import Header from "@/components/header";
 import localFont from "next/font/local";
 import StoreProvider from "./StoreProvider";
-import { AntdRegistry } from "@ant-design/nextjs-registry";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -38,11 +37,9 @@ export default function RootLayout({
   return (
     <html lang="en" dir="rtl">
       <StoreProvider>
-        <AntdRegistry>
-          <body className={shabnam.className}>
-            <Header /> <div className="py-10 px-[60px]">{children}</div>
-          </body>
-        </AntdRegistry>
+        <body className={shabnam.className}>
+          <Header /> <div className="py-10 px-[60px]">{children}</div>
+        </body>
       </StoreProvider>
     </html>
   );

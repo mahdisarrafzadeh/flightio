@@ -16,7 +16,7 @@ const Header: React.FC = () => {
         priority
         className="object-cover w-auto h-auto"
       />
-      <section className="flex flex-row px-[20px] py-2 border-solid border-[1px] rounded-[50px] cursor-pointer ">
+      <section className="flex flex-row px-[20px] py-2 border-solid border-[1px] max-sm:rounded-full max-sm:px-2 rounded-[50px] cursor-pointer ">
         <Image
           src="/account_circle.svg"
           alt="Testio Logo"
@@ -24,7 +24,7 @@ const Header: React.FC = () => {
           height={24}
           priority
         />
-        <span className="text-default-gray font-normal pr-1">
+        <span className="text-default-gray font-normal pr-1 max-sm:hidden">
           {string.name}
         </span>
       </section>

@@ -6,7 +6,7 @@ import {
   ProductInitialState,
 } from "@/interfaces/product.interfaces";
 
-const initialState: ProductInitialState = {
+export const initialState: ProductInitialState = {
   products: [],
   productDetail: undefined,
   status: "idle",

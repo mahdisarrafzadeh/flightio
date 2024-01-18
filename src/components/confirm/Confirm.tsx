@@ -38,10 +38,10 @@ const Confirm: FC<Props> = ({ productId }) => {
               <p className="font-bold text-lg ">
                 آیا از حذف محصول اطمینان دارید؟
               </p>
-              <Space className="mt-8">
+              <div className="mt-8 flex gap-4 ">
                 <button
                   type="button"
-                  className="bg-[#B02626] rounded-[40px] text-white p-2 font-medium text-base"
+                  className="bg-[#B02626] rounded-[40px] text-white p-2 font-medium text-base "
                   onClick={() => handleOk()}
                 >
                   بله، حذف محصول
@@ -54,7 +54,7 @@ const Confirm: FC<Props> = ({ productId }) => {
                 >
                   انصراف
                 </button>
-              </Space>
+              </div>
             </div>
           </div>
         </dialog>

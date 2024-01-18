@@ -1,7 +1,6 @@
 "use client";
 
 import { IFormInput, Product } from "@/interfaces/product.interfaces";
-import { Space } from "antd";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import React, { FC, useEffect } from "react";
@@ -128,7 +127,7 @@ const EditProduct: FC<Props> = ({ productDetail }) => {
                   />
                 </div>
 
-                <Space className="mt-8">
+                <div className="flex gap-4 mt-8">
                   <button
                     type="submit"
                     className="bg-[#1A43D3] rounded-[40px] text-white p-2 font-medium text-base"
@@ -142,7 +141,7 @@ const EditProduct: FC<Props> = ({ productDetail }) => {
                   >
                     انصراف
                   </button>
-                </Space>
+                </div>
               </form>
             </div>
           </div>

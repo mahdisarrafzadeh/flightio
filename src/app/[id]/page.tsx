@@ -3,7 +3,6 @@
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { retrieveProductById, selectProduct } from "@/redux/slices/product";
 import React, { useEffect, FC } from "react";
-import { Card, Row, Col, Typography, Flex, Space, Divider } from "antd";
 import Image from "next/image";
 import Confirm from "@/components/confirm/Confirm";
 import { useRouter } from "next/navigation";
@@ -37,18 +36,13 @@ const ProductPage: FC<Props> = ({ params }) => {
 
   return (
     <>
-      <Card className="!rounded-[20px]" bodyStyle={{ padding: 0 }}>
-        <Row>
-          <Col
-            xs={6}
-            className="relative border-solid border-l justify-center items-center h-full py-[50px] px-[72px]"
-          >
-            <div className="absolute top-5 right-5">
+      <div className="rounded-[20px] border border-solid border-[#E0E0E0] p-0 bg-white">
+        <div className="grid grid-flow-col max-md:grid-flow-row">
+          <div className="relative border-solid border-l justify-center items-center h-full py-[50px] px-[72px]">
+            <div className="absolute top-5 right-5 col-start-2">
               <div className="flex flex-row border rounded-[50px] bg-[#FFF] ">
-                <Space
-                  size={4}
-                  className="py-1 px-[10px] border-l cursor-pointer"
-                  align="end"
+                <div
+                  className="flex flex-row justify-center items-center px-3 py-3 border-l"
                   onClick={() => handleEditModal()}
                 >
                   <Image
@@ -56,16 +50,15 @@ const ProductPage: FC<Props> = ({ params }) => {
                     alt="rating"
                     width={16}
                     height={16}
-                    className="h-auto w-auto"
+                    className="h-auto w-auto ml-1"
                   />
                   <span className="text-[#1A43D3] text-xs font-medium ">
                     {string.edit}
                   </span>
-                </Space>
-                <Space
+                </div>
+                <div
+                  className="flex flex-row justify-center items-center px-3 py-3"
                   onClick={() => handleConfirmModal()}
-                  size={4}
-                  className="py-1 px-[10px] cursor-pointer"
                 >
                   <Image
                     src="/delete.svg"
@@ -79,10 +72,10 @@ const ProductPage: FC<Props> = ({ params }) => {
                   <div className="text-[#B02626] text-xs font-medium">
                     {string.delete}
                   </div>
-                </Space>
+                </div>
               </div>
             </div>
-            <div className="flex h-[400px] object-contain pt-6 pb-[26px] items-center ">
+            <div className="flex h-[400px] max-md:h-[250px] justify-center object-contain pt-6 pb-[26px] items-center ">
               {productDetail?.image && productDetail?.title && (
                 <Image
                   src={productDetail?.image}
@@ -93,23 +86,16 @@ const ProductPage: FC<Props> = ({ params }) => {
                 />
               )}
             </div>
-          </Col>
-          <Col className="flex flex-col justify-between" xs={18}>
-            <Row gutter={[0, 16]} className="w-full pt-10  h-full">
-              <Col className=" px-5" xs={24}>
-                <Flex className="border-b mb-4" justify="end" vertical>
-                  <Typography.Title level={4}>
+          </div>
+          <div className="flex flex-col justify-around ">
+            <div className="w-full pt-10 max-md:pt-5  h-full">
+              <div className="px-5">
+                <div className="border-b mb-4 flex justify-end flex-col">
+                  <h2 className="text-xl font-bold leading-8">
                     {productDetail?.title}
-                  </Typography.Title>
-                  <Space
-                    className="py-4"
-                    size={12}
-                    split={
-                      <Divider type="vertical" className="h-16 bg-[#E0E0E0]" />
-                    }
-                    align="start"
-                  >
-                    <Flex justify="center" align="center">
+                  </h2>
+                  <div className="flex justify-start py-4 items-center gap-3">
+                    <div className="flex justify-center items-center  ">
                       <Image
                         src="/kid_star.svg"
                         alt="rating"
@@ -117,43 +103,39 @@ const ProductPage: FC<Props> = ({ params }) => {
                         height={24}
                         className="h-auto w-auto"
                       />
-                      <span className="text-default-gray font-normal text-xs pr-2">
+                      <span className="text-default-gray font-normal text-xs pr-2 ">
                         {productDetail?.rating?.rate}
                       </span>
-                    </Flex>
+                    </div>
+                    <hr className="border h-4  border-[#E0E0E0]" />
                     <span className="text-default-gray font-normal text-xs">
                       {productDetail?.rating?.count &&
                         `${productDetail?.rating?.count + string.count}`}
                     </span>
-                  </Space>
-                </Flex>
-                <Typography.Text>{productDetail?.description}</Typography.Text>
-              </Col>
-              <Col className="border-t mt-28 px-5" xs={24}>
-                <Row className="h-full items-center">
-                  <Col xs={12}>
-                    <div className="flex justify-start">
-                      <span className="text-default-gray text-xs font-medium">
-                        مبلغ قابل پرداخت:
-                      </span>
-                    </div>
-                  </Col>
-                  <Col xs={12}>
-                    <div className="flex justify-end">
-                      <Space
-                        size={4}
-                        className="text-default-blue text-lg font-bold"
-                      >
-                        {productDetail?.price}تومان
-                      </Space>
-                    </div>
-                  </Col>
-                </Row>
-              </Col>
-            </Row>
-          </Col>
-        </Row>
-      </Card>
+                  </div>
+                </div>
+                <span className="text-[#757575] text-xs font-normal">
+                  {productDetail?.description}
+                </span>
+              </div>
+            </div>
+            <div className="border-t mt-28 px-5">
+              <div className="h-full flex items-center justify-between pt-[31px] pb-9 pl-[34px] pr-5">
+                <div className="flex justify-start">
+                  <span className="text-default-gray text-xs font-medium">
+                    مبلغ قابل پرداخت:
+                  </span>
+                </div>
+                <div className="flex justify-end">
+                  <span className="text-default-blue  text-lg font-bold">
+                    {productDetail?.price} تومان
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <Confirm productId={productDetail?.id} />
       <EditProduct productDetail={productDetail} />
     </>
