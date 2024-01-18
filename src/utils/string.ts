@@ -11,6 +11,7 @@ export const productItem = {
   delete: " حذف محصول",
   exchange: "تومان",
   payment: "مبلغ قابل پرداخت:",
+  notFound: `We're sorry, but we couldn't locate any product with the provided ID.`,
 };
 
 export const confirm = {

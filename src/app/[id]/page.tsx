@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from "@/hooks";
 import { selectProduct } from "@/redux/slices/product";
 import { retrieveProductById } from "@/redux/slices/service";
 
+import { productItem as string } from "@/utils/string";
 import { Loading, NotFound } from "@/components/common";
 import Confirm from "@/components/confirm/Confirm";
 import EditProduct from "@/components/edit-product/EditProduct";
@@ -27,11 +28,7 @@ const ProductPage: FC<Props> = ({ params }) => {
     return <Loading />;
   }
   if (!productDetail) {
-    return (
-      <NotFound
-        text={`We're sorry, but we couldn't locate any product with the provided ID.`}
-      />
-    );
+    return <NotFound text={string.notFound} />;
   } else
     return (
       <>
