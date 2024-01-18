@@ -44,7 +44,7 @@ export default function Home() {
           setActiveKey={setActiveKey}
           activeKey={activeKey}
         />
-        {!status.includes("succeeded") ? (
+        {status !== "succeeded" ? (
           <Loading />
         ) : products && products.length === 0 ? (
           <NotFound text={string.notFound} />
