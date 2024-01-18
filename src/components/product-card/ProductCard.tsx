@@ -4,13 +4,7 @@ import Image from "next/image";
 import { useAppSelector } from "@/hooks";
 import { selectProduct } from "@/redux/slices/product";
 import ButtonGroup from "./button-group/ButtonGroup";
-
-const string = {
-  count: " تا باقی مانده ",
-  edit: "ویرایش",
-  delete: " حذف محصول",
-};
-
+import { productItem as string } from "@/utils/string";
 const ProductCard: FC = () => {
   const { productDetail } = useAppSelector(selectProduct);
 
@@ -64,10 +58,10 @@ const ProductCard: FC = () => {
         <div className="border-t mt-28 px-5">
           <div className="h-full flex items-center justify-between pt-[31px] pb-9 pl-[34px] pr-5">
             <span className="text-default-gray text-xs font-medium flex justify-start">
-              مبلغ قابل پرداخت:
+              {string.payment}
             </span>
             <span className="text-default-blue text-lg font-bold flex justify-end">
-              {productDetail?.price} تومان
+              {productDetail?.price} {string.exchange}
             </span>
           </div>
         </div>

@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from "@/hooks";
 import { deleteProductById } from "@/redux/slices/service";
 import { selectProduct } from "@/redux/slices/product";
 
+import { confirm as string } from "@/utils/string";
 import { Button } from "../common";
 
 type Props = {
@@ -39,16 +40,16 @@ const Confirm: FC<Props> = ({ productId }) => {
   return (
     <dialog className="fixed left-0 top-0 w-full h-full bg-black bg-opacity-5 z-50 overflow-auto backdrop-brightness-50 flex justify-center items-center">
       <div className="flex flex-col items-start text-right bg-white m-auto p-8  max-md:w-11/12 w-[426px] rounded-[20px]">
-        <p className="font-bold text-lg ">آیا از حذف محصول اطمینان دارید؟</p>
+        <p className="font-bold text-lg ">{string.text}</p>
         <div className="mt-8 flex gap-4">
           <Button
             type="danger"
             onClick={() => handleOk()}
             loading={deleteLoading}
           >
-            بله، حذف محصول
+            {string.yes}
           </Button>
-          <Button onClick={() => handleCancel()}>انصراف</Button>
+          <Button onClick={() => handleCancel()}>{string.no}</Button>
         </div>
       </div>
     </dialog>

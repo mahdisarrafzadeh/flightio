@@ -1,9 +1,7 @@
 import { FC } from "react";
 import Image from "next/image";
 
-const string = {
-  name: "مهدی صراف زاده",
-};
+import { header as string } from "@/utils/string";
 
 const Header: FC = () => {
   return (

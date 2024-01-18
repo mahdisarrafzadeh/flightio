@@ -5,20 +5,13 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { retrieveProductById, updateProduct } from "@/redux/slices/service";
 
+import { edit as string } from "@/utils/string";
 import { IFormInput, Product } from "@/interfaces/product.interfaces";
 import { Input, Button, Textarea } from "@/components/common";
 import { selectProduct } from "@/redux/slices/product";
 
 type Props = {
   productDetail?: Product;
-};
-
-const string = {
-  title: "ویرایش محصول",
-  labelTitle: "عنوان محصول",
-  labelPrice: "قیمت اصلی محصول",
-  labelCount: "تعداد موجودی",
-  labelExplain: "توضیحات",
 };
 
 const Form: FC<Props> = ({ productDetail }) => {
@@ -111,9 +104,9 @@ const Form: FC<Props> = ({ productDetail }) => {
 
       <div className="flex gap-4 mt-8">
         <Button type="primary" submit loading={updateLoading}>
-          ثبت تغییرات
+          {string.submit}
         </Button>
-        <Button onClick={() => handleCancel()}>انصراف</Button>
+        <Button onClick={() => handleCancel()}>{string.cancel}</Button>
       </div>
     </form>
   );

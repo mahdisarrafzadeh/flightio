@@ -1,19 +1,12 @@
 import React, { FC } from "react";
 import { useSearchParams } from "next/navigation";
 
+import { edit as string } from "@/utils/string";
 import { Product } from "@/interfaces/product.interfaces";
 import Form from "./form";
 
 type Props = {
   productDetail?: Product;
-};
-
-const string = {
-  title: "ویرایش محصول",
-  labelTitle: "عنوان محصول",
-  labelPrice: "قیمت اصلی محصول",
-  labelCount: "تعداد موجودی",
-  labelExplain: "توضیحات",
 };
 
 const EditProduct: FC<Props> = ({ productDetail }) => {

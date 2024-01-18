@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 import { Product } from "@/interfaces/product.interfaces";
+import { home as string } from "@/utils/string";
 
 interface Props {
   productDetail: Product;
@@ -45,7 +46,10 @@ const ProductItem: FC<Props> = ({ productDetail }) => {
             {rating?.rate}
           </span>
         </div>
-        <div className="text-default-blue text-lg font-bold">{price} تومان</div>
+        <div className="text-default-blue text-lg font-bold">
+          {price}
+          {string.mony}
+        </div>
       </div>
     </div>
   );
