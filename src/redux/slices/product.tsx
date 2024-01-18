@@ -1,12 +1,16 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import ProductDataService from "../../services/product.service";
 import { RootState } from "../store";
 import {
   IFormInput,
   Product,
   ProductInitialState,
 } from "@/interfaces/product.interfaces";
-import { toast } from "react-hot-toast";
+import {
+  deleteProductById,
+  retrieveProductById,
+  retrieveProducts,
+  updateProduct,
+} from "./service";
 
 export const initialState: ProductInitialState = {
   products: undefined,
@@ -16,56 +20,6 @@ export const initialState: ProductInitialState = {
   deleteLoading: false,
   updateLoading: false,
 };
-
-export const retrieveProducts = createAsyncThunk(
-  "products/retrieve",
-  async () => {
-    const res = await ProductDataService.getAll();
-    if ("error" in res) {
-      toast.error("Something Wrong");
-    } else {
-      return res?.data;
-    }
-  }
-);
-
-export const retrieveProductById = createAsyncThunk(
-  "products/retrieveProductById",
-  async (id: number) => {
-    const res = await ProductDataService.getById(id);
-    if ("error" in res) {
-      toast.error("Something Wrong");
-    } else {
-      return res?.data;
-    }
-  }
-);
-
-export const deleteProductById = createAsyncThunk(
-  "products/delete",
-  async (data: { id: number; onSuccess: Function }) => {
-    const res = await ProductDataService.delete(data.id);
-    if ("error" in res) {
-      toast.error("Something Wrong");
-    } else {
-      toast.success(`Product Delete Successfully`);
-      data.onSuccess();
-    }
-  }
-);
-
-export const updateProduct = createAsyncThunk(
-  "products/update",
-  async (data: { data: IFormInput; onSuccess: Function }) => {
-    const res = await ProductDataService.update(data.data);
-    if ("error" in res) {
-      toast.error("Something Wrong");
-    } else {
-      toast.success(`Product Update Successfully`);
-      data.onSuccess();
-    }
-  }
-);
 
 const productSlice = createSlice({
   name: "product",
@@ -116,10 +70,10 @@ const productSlice = createSlice({
       })
       .addCase(deleteProductById.pending, (state) => {
         state.deleteLoading = true;
-        state.productDetail = undefined;
       })
       .addCase(deleteProductById.fulfilled, (state) => {
         state.deleteLoading = false;
+        state.productDetail = undefined;
       })
       .addCase(deleteProductById.rejected, (state) => {
         state.deleteLoading = false;

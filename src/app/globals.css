@@ -5,4 +5,5 @@
 body {
   color: rgb(var(--foreground-rgb));
   background: #f4f4f4;
+  font-display: swap;
 }

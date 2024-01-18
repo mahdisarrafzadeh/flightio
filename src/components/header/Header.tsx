@@ -1,11 +1,11 @@
-import React from "react";
+import { FC } from "react";
 import Image from "next/image";
 
 const string = {
-  name: "بردیا ادیبی",
+  name: "مهدی صراف زاده",
 };
 
-const Header: React.FC = () => {
+const Header: FC = () => {
   return (
     <header className="bg-white px-[60px] flex justify-between items-center h-[72px] shrink-0">
       <Image

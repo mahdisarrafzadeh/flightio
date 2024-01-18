@@ -1,11 +1,7 @@
-"use client";
-import React, { FC, useEffect, useCallback, useMemo } from "react";
+import React, { FC, useEffect, useMemo } from "react";
+
 import classNames from "classnames";
-import { useAppDispatch } from "@/hooks";
-import {
-  sortProductsByCheapest,
-  sortProductsByExpensive,
-} from "@/redux/slices/product";
+
 type Props = {
   items: string[];
   activeKey?: string;
@@ -13,17 +9,10 @@ type Props = {
 };
 
 const Tabs: FC<Props> = ({ items, activeKey, setActiveKey }) => {
-  const dispatch = useAppDispatch();
   useEffect(() => {
     !activeKey && setActiveKey(items[0]);
-  }, [activeKey]);
+  }, []); // eslint-disable-line
 
-  const memoizedSetActiveKey = useCallback(
-    (item: string) => {
-      setActiveKey(item);
-    },
-    [setActiveKey]
-  );
   const tabElements = useMemo(() => {
     return items.map((item) => (
       <div
@@ -35,7 +24,7 @@ const Tabs: FC<Props> = ({ items, activeKey, setActiveKey }) => {
             " !text-default-blue leading-8 text-sm font-bold":
               activeKey === item,
           })}
-          onClick={() => memoizedSetActiveKey(item)}
+          onClick={() => setActiveKey(item)}
         >
           {item}
         </span>
@@ -44,9 +33,13 @@ const Tabs: FC<Props> = ({ items, activeKey, setActiveKey }) => {
         )}
       </div>
     ));
-  }, [items, activeKey, memoizedSetActiveKey]);
+  }, [items, activeKey]); // eslint-disable-line
 
-  return <>{tabElements}</>;
+  return (
+    <section className="bg-white flex justify-start px-3 py-2 rounded-lg border-[1px] border-solid min-h-[56px] ">
+      {tabElements}
+    </section>
+  );
 };
 
 export default Tabs;

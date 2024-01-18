@@ -1,13 +1,8 @@
-"use client";
+import React, { FC } from "react";
+import { useSearchParams } from "next/navigation";
 
-import { IFormInput, Product } from "@/interfaces/product.interfaces";
-import { usePathname, useSearchParams } from "next/navigation";
-import { useRouter } from "next/navigation";
-import React, { FC, useEffect } from "react";
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import Input from "../Input";
-import { retrieveProductById, updateProduct } from "@/redux/slices/product";
-import { useAppDispatch } from "@/hooks";
+import { Product } from "@/interfaces/product.interfaces";
+import Form from "./form";
 
 type Props = {
   productDetail?: Product;
@@ -22,139 +17,23 @@ const string = {
 };
 
 const EditProduct: FC<Props> = ({ productDetail }) => {
-  const { control, setValue, reset, handleSubmit } = useForm({
-    defaultValues: {
-      id: 1,
-      title: "",
-      price: 0,
-      count: 0,
-      description: "",
-    },
-  });
-
   const searchParams = useSearchParams();
   const edit = searchParams.get("edit");
-  const pathname = usePathname();
-  const router = useRouter();
-  const dispatch = useAppDispatch();
 
-  const handleCancel = () => {
-    router.push(pathname);
-    reset();
-  };
-
-  const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    if (productDetail && data) {
-      dispatch(
-        updateProduct({
-          data: data,
-          onSuccess: () => dispatch(retrieveProductById(productDetail?.id)),
-        })
-      );
-    }
-  };
-
-  useEffect(() => {
-    if (productDetail) {
-      setValue("id", productDetail?.id),
-        setValue("title", productDetail?.title || ""),
-        setValue("price", productDetail?.price || 0);
-      setValue("count", productDetail?.rating?.count || 0);
-      setValue("description", productDetail?.description || "");
-    } else reset();
-  }, [productDetail]); //eslint-disable-line
-
+  if (!edit && productDetail) {
+    return null;
+  }
   return (
-    <>
-      {edit && (
-        <dialog className="fixed left-0 top-0 w-full h-full bg-black bg-opacity-5 z-50 overflow-auto backdrop-brightness-50 flex justify-center items-center">
-          <div className="bg-white  xl:h-[550px]  m-auto w-3/6 rounded-[20px]">
-            <div className="flex flex-col items-start text-right h-full">
-              <p className="font-bold text-lg w-full border-b p-6">
-                {string.title}
-              </p>
-              <form
-                className="w-full p-6  h-full flex flex-col justify-between"
-                onSubmit={handleSubmit(onSubmit)}
-              >
-                <div className="grid gap-3">
-                  <Controller
-                    name="title"
-                    control={control}
-                    render={({ field }) => (
-                      <div className="border rounded-lg w-full  pr-4">
-                        <Input
-                          label={string.labelTitle}
-                          field={field}
-                          type="text"
-                        />
-                      </div>
-                    )}
-                  />
-                  <div className="flex flex-row gap-5">
-                    <Controller
-                      name="price"
-                      control={control}
-                      render={({ field }) => (
-                        <div className="border rounded-lg  w-1/2  pr-4">
-                          <Input
-                            label={string.labelPrice}
-                            field={field}
-                            type="number"
-                          />
-                        </div>
-                      )}
-                    />
-                    <Controller
-                      name="count"
-                      control={control}
-                      render={({ field }) => (
-                        <div className="border rounded-lg  w-1/2  pr-4">
-                          <Input
-                            label={string.labelCount}
-                            field={field}
-                            type="number"
-                          />
-                        </div>
-                      )}
-                    />
-                  </div>
-                  <Controller
-                    name="description"
-                    control={control}
-                    render={({ field }) => (
-                      <div className="border rounded-lg  w-full pr-4">
-                        <Input
-                          label={string.labelExplain}
-                          field={field}
-                          type="textarea"
-                        />
-                      </div>
-                    )}
-                  />
-                </div>
-
-                <div className="flex gap-4 mt-8">
-                  <button
-                    type="submit"
-                    className="bg-[#1A43D3] rounded-[40px] text-white p-2 font-medium text-base"
-                  >
-                    ثبت تغییرات
-                  </button>
-                  <button
-                    type="button"
-                    className="bg-[#E5E5E5] rounded-[40px] text-black  p-2 font-medium text-base"
-                    onClick={() => handleCancel()}
-                  >
-                    انصراف
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </dialog>
-      )}
-    </>
+    <dialog className="fixed left-0 top-0 w-full h-full bg-black bg-opacity-5 z-50 overflow-auto backdrop-brightness-50 flex justify-center items-center">
+      <div className="bg-white xl:h-[550px]  m-auto max-md:w-11/12 w-3/6 rounded-[20px]">
+        <div className="flex flex-col items-start text-right h-full">
+          <p className="font-bold text-lg w-full border-b p-6">
+            {string.title}
+          </p>
+          <Form productDetail={productDetail} />
+        </div>
+      </div>
+    </dialog>
   );
 };
 

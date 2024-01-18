@@ -1,22 +1,25 @@
-"use client";
-
-import { useAppDispatch } from "@/hooks";
-import { deleteProductById } from "@/redux/slices/product";
-import { Space } from "antd";
+import { FC } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import React, { FC } from "react";
+
+import { useAppDispatch, useAppSelector } from "@/hooks";
+import { deleteProductById } from "@/redux/slices/service";
+import { selectProduct } from "@/redux/slices/product";
+
+import { Button } from "../common";
 
 type Props = {
   productId?: number;
 };
 
 const Confirm: FC<Props> = ({ productId }) => {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const modal = searchParams.get("modal");
   const pathname = usePathname();
-  const router = useRouter();
+
   const dispatch = useAppDispatch();
+  const { deleteLoading } = useAppSelector(selectProduct);
 
   const handleOk = () => {
     if (productId) {
@@ -30,37 +33,25 @@ const Confirm: FC<Props> = ({ productId }) => {
     router.push(pathname);
   };
 
+  if (!modal) {
+    return null;
+  }
   return (
-    <>
-      {modal && (
-        <dialog className="fixed left-0 top-0 w-full h-full bg-black bg-opacity-5 z-50 overflow-auto backdrop-brightness-50 flex justify-center items-center">
-          <div className="bg-white m-auto p-8 w-[426px] rounded-[20px]">
-            <div className="flex flex-col items-start text-right">
-              <p className="font-bold text-lg ">
-                آیا از حذف محصول اطمینان دارید؟
-              </p>
-              <div className="mt-8 flex gap-4 ">
-                <button
-                  type="button"
-                  className="bg-[#B02626] rounded-[40px] text-white p-2 font-medium text-base "
-                  onClick={() => handleOk()}
-                >
-                  بله، حذف محصول
-                </button>
-
-                <button
-                  type="button"
-                  className="bg-[#E5E5E5] rounded-[40px] text-black  p-2 font-medium text-base"
-                  onClick={() => handleCancel()}
-                >
-                  انصراف
-                </button>
-              </div>
-            </div>
-          </div>
-        </dialog>
-      )}
-    </>
+    <dialog className="fixed left-0 top-0 w-full h-full bg-black bg-opacity-5 z-50 overflow-auto backdrop-brightness-50 flex justify-center items-center">
+      <div className="flex flex-col items-start text-right bg-white m-auto p-8  max-md:w-11/12 w-[426px] rounded-[20px]">
+        <p className="font-bold text-lg ">آیا از حذف محصول اطمینان دارید؟</p>
+        <div className="mt-8 flex gap-4">
+          <Button
+            type="danger"
+            onClick={() => handleOk()}
+            loading={deleteLoading}
+          >
+            بله، حذف محصول
+          </Button>
+          <Button onClick={() => handleCancel()}>انصراف</Button>
+        </div>
+      </div>
+    </dialog>
   );
 };
 
