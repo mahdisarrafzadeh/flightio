@@ -20,8 +20,9 @@ const Confirm: FC<Props> = ({ productId }) => {
 
   const handleOk = () => {
     if (productId) {
-      dispatch(deleteProductById(productId));
-      router.push("/");
+      dispatch(
+        deleteProductById({ id: productId, onSuccess: () => router.push("/") })
+      );
     }
   };
 

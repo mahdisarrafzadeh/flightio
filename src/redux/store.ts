@@ -6,6 +6,7 @@ export const makeStore = () => {
     reducer: {
       products: productsReducer,
     },
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
   });
 };
 

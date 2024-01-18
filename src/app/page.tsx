@@ -2,7 +2,7 @@
 import { useEffect } from "react";
 import Tabs from "@/components/tabs";
 import { useState } from "react";
-import { useAppDispatch, useAppSelector, useAppStore } from "@/hooks";
+import { useAppDispatch, useAppSelector } from "@/hooks";
 import {
   retrieveProducts,
   selectProduct,
@@ -11,7 +11,6 @@ import {
 } from "@/redux/slices/product";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import toast from "react-hot-toast";
 
 const tabItems = ["ارزان‌ترین", "گران‌‌ترین"];
 

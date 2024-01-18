@@ -6,22 +6,25 @@ import {
   Product,
   ProductInitialState,
 } from "@/interfaces/product.interfaces";
+import { toast } from "react-hot-toast";
 
 export const initialState: ProductInitialState = {
-  products: [],
+  products: undefined,
   productDetail: undefined,
   status: "idle",
   error: undefined,
   deleteLoading: false,
+  updateLoading: false,
 };
 
 export const retrieveProducts = createAsyncThunk(
   "products/retrieve",
   async () => {
-    const result = await ProductDataService.getAll();
-    if ("error" in result) {
+    const res = await ProductDataService.getAll();
+    if ("error" in res) {
+      toast.error("Something Wrong");
     } else {
-      return result?.data;
+      return res?.data;
     }
   }
 );
@@ -30,23 +33,37 @@ export const retrieveProductById = createAsyncThunk(
   "products/retrieveProductById",
   async (id: number) => {
     const res = await ProductDataService.getById(id);
-    return res?.data;
+    if ("error" in res) {
+      toast.error("Something Wrong");
+    } else {
+      return res?.data;
+    }
   }
 );
 
 export const deleteProductById = createAsyncThunk(
   "products/delete",
-  async (id: number) => {
-    const res = await ProductDataService.delete(id);
-    return res?.data;
+  async (data: { id: number; onSuccess: Function }) => {
+    const res = await ProductDataService.delete(data.id);
+    if ("error" in res) {
+      toast.error("Something Wrong");
+    } else {
+      toast.success(`Product Delete Successfully`);
+      data.onSuccess();
+    }
   }
 );
 
 export const updateProduct = createAsyncThunk(
   "products/update",
-  async (data: IFormInput) => {
-    const res = await ProductDataService.update(data);
-    return res?.data;
+  async (data: { data: IFormInput; onSuccess: Function }) => {
+    const res = await ProductDataService.update(data.data);
+    if ("error" in res) {
+      toast.error("Something Wrong");
+    } else {
+      toast.success(`Product Update Successfully`);
+      data.onSuccess();
+    }
   }
 );
 
@@ -107,11 +124,14 @@ const productSlice = createSlice({
       .addCase(deleteProductById.rejected, (state) => {
         state.deleteLoading = false;
       })
+      .addCase(updateProduct.pending, (state) => {
+        state.updateLoading = true;
+      })
       .addCase(updateProduct.fulfilled, (state) => {
-        state.deleteLoading = false;
+        state.updateLoading = false;
       })
       .addCase(updateProduct.rejected, (state) => {
-        state.deleteLoading = false;
+        state.updateLoading = false;
       });
   },
 });

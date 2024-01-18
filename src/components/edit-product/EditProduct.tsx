@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import React, { FC, useEffect } from "react";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import Input from "../Input";
-import { updateProduct } from "@/redux/slices/product";
+import { retrieveProductById, updateProduct } from "@/redux/slices/product";
 import { useAppDispatch } from "@/hooks";
 
 type Props = {
@@ -44,7 +44,14 @@ const EditProduct: FC<Props> = ({ productDetail }) => {
   };
 
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    dispatch(updateProduct(data));
+    if (productDetail && data) {
+      dispatch(
+        updateProduct({
+          data: data,
+          onSuccess: () => dispatch(retrieveProductById(productDetail?.id)),
+        })
+      );
+    }
   };
 
   useEffect(() => {

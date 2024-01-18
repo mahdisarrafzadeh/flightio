@@ -24,6 +24,7 @@ export interface ProductInitialState {
   status: "idle" | "loading" | "succeeded" | "failed";
   productDetail?: Product;
   error?: string; // current active car tab index
-  deleteLoading?: boolean;
+  deleteLoading: boolean;
   sortedProducts?: Product[];
+  updateLoading: boolean;
 }
