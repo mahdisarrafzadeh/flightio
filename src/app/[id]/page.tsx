@@ -10,7 +10,6 @@ import { Loading, NotFound } from "@/components/common";
 import Confirm from "@/components/confirm/Confirm";
 import EditProduct from "@/components/edit-product/EditProduct";
 import ProductCard from "@/components/product-card/ProductCard";
-import Head from "next/head";
 
 type Props = {
   params: { id: number };
