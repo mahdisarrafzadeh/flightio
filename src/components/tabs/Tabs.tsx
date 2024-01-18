@@ -1,6 +1,11 @@
 "use client";
 import React, { FC, useEffect, useCallback, useMemo } from "react";
 import classNames from "classnames";
+import { useAppDispatch } from "@/hooks";
+import {
+  sortProductsByCheapest,
+  sortProductsByExpensive,
+} from "@/redux/slices/product";
 type Props = {
   items: string[];
   activeKey?: string;
@@ -8,9 +13,10 @@ type Props = {
 };
 
 const Tabs: FC<Props> = ({ items, activeKey, setActiveKey }) => {
+  const dispatch = useAppDispatch();
   useEffect(() => {
     !activeKey && setActiveKey(items[0]);
-  }, []);
+  }, [activeKey]);
 
   const memoizedSetActiveKey = useCallback(
     (item: string) => {

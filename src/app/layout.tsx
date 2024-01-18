@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "@/components/header";
 import localFont from "next/font/local";
 import StoreProvider from "./StoreProvider";
+import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -38,7 +39,9 @@ export default function RootLayout({
     <html lang="en" dir="rtl">
       <StoreProvider>
         <body className={shabnam.className}>
-          <Header /> <div className="py-10 px-[60px]">{children}</div>
+          <Toaster position="top-left" />
+          <Header />
+          <div className="py-10 px-[60px]">{children}</div>
         </body>
       </StoreProvider>
     </html>

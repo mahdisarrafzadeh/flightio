@@ -25,4 +25,5 @@ export interface ProductInitialState {
   productDetail?: Product;
   error?: string; // current active car tab index
   deleteLoading?: boolean;
+  sortedProducts?: Product[];
 }

@@ -3,8 +3,15 @@ import { useEffect } from "react";
 import Tabs from "@/components/tabs";
 import { useState } from "react";
 import { useAppDispatch, useAppSelector, useAppStore } from "@/hooks";
-import { retrieveProducts, selectProduct } from "@/redux/slices/product";
+import {
+  retrieveProducts,
+  selectProduct,
+  sortProductsByCheapest,
+  sortProductsByExpensive,
+} from "@/redux/slices/product";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 const tabItems = ["ارزان‌ترین", "گران‌‌ترین"];
 
@@ -12,10 +19,20 @@ export default function Home() {
   const [activeKey, setActiveKey] = useState<string | undefined>(tabItems[0]);
   const dispatch = useAppDispatch();
   const { products } = useAppSelector(selectProduct);
-
+  const router = useRouter();
   useEffect(() => {
     dispatch(retrieveProducts());
   }, []);
+
+  useEffect(() => {
+    if (activeKey && products) {
+      if (activeKey.includes("ارزان‌ترین")) {
+        dispatch(sortProductsByCheapest());
+      } else {
+        dispatch(sortProductsByExpensive());
+      }
+    }
+  }, [products, activeKey]);
 
   return (
     <main>
@@ -28,23 +45,26 @@ export default function Home() {
           />
         </section>
         <section className="w-full">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
             {products?.map(({ id, image, title, rating, price }) => (
               <div
                 key={id}
-                className="cursor-pointer bg-white border-1 border-[#E0E0E0] border-solid rounded-lg p-4"
+                className="grid  p-4 cursor-pointer bg-white border-1 border-[#E0E0E0] border-solid rounded-lg border"
+                onClick={() => router.push(`/${id}`)}
               >
-                <Image
-                  src={image || ""}
-                  alt={title || ""}
-                  width={213}
-                  height={240}
-                  className="w-[213px] h-[240px] object-contain mb-4"
-                />
+                <div className="flex justify-center ">
+                  <Image
+                    src={image || ""}
+                    alt={title || ""}
+                    width={213}
+                    height={240}
+                    className="w-[213px] h-[240px] object-contain mb-4 "
+                  />
+                </div>
                 <h2 className="font-bold text-base overflow-hidden line-clamp-2">
                   {title}
                 </h2>
-                <div className="flex justify-between items-center mt-2">
+                <div className="flex w-full justify-between items-center mt-4">
                   <div className="flex items-center">
                     <Image
                       src="/kid_star.svg"
