@@ -5,22 +5,23 @@ import { useAppSelector } from "@/hooks";
 import { selectProduct } from "@/redux/slices/product";
 import ButtonGroup from "./button-group/ButtonGroup";
 import { productItem as string } from "@/utils/string";
+
 const ProductCard: FC = () => {
   const { productDetail } = useAppSelector(selectProduct);
 
   return (
-    <div className=" rounded-[20px] border border-solid border-[#E0E0E0] p-0 bg-white grid grid-flow-col max-md:grid-flow-row">
-      <div className="relative border-solid max-md:border-b md:border-l justify-center items-center h-full py-[50px] px-[72px]">
+    <div className=" rounded-[20px] border border-solid border-default p-0 bg-white grid grid-flow-col max-md:grid-flow-row">
+      <div className="relative border-solid max-md:border-b md:border-l justify-center items-center h-full py-12 px-[72px]">
         <ButtonGroup id={productDetail?.id} />
         <div className="flex h-[400px] max-md:h-[250px] justify-center object-contain pt-6 pb-[26px] items-center ">
           {productDetail?.image && productDetail?.title && (
             <Image
               src={productDetail?.image}
               alt={productDetail?.title}
-              width={213}
-              height={240}
+              width={400}
+              height={400}
               priority
-              className="w-auto h-auto"
+              className="w-[400px] h-[400px]"
             />
           )}
         </div>
@@ -44,18 +45,18 @@ const ProductCard: FC = () => {
                   {productDetail?.rating?.rate}
                 </span>
               </div>
-              <hr className="border h-4  border-[#E0E0E0]" />
+              <hr className="border h-4  border-default" />
               <span className="text-default-gray font-normal text-xs">
                 {productDetail?.rating?.count &&
                   `${productDetail?.rating?.count + string.count}`}
               </span>
             </div>
           </div>
-          <span className="text-[#757575] text-xs font-normal">
+          <span className="text-default-gray text-xs font-normal">
             {productDetail?.description}
           </span>
         </div>
-        <div className="border-t mt-28 px-5">
+        <div className="border-t px-5">
           <div className="h-full flex items-center justify-between pt-[31px] pb-9 pl-[34px] pr-5">
             <span className="text-default-gray text-xs font-medium flex justify-start">
               {string.payment}

@@ -16,17 +16,17 @@ const ProductItem: FC<Props> = ({ productDetail }) => {
   return (
     <div
       key={id}
-      className="grid  p-4 cursor-pointer bg-white border-1 border-[#E0E0E0] border-solid rounded-lg border"
+      className="grid  px-4 pt-6 py-5  cursor-pointer bg-white border-1 border-default border-solid rounded-lg border"
       onClick={() => router.push(`/${id}`)}
     >
-      <div className="flex justify-center  h-[250px]">
+      <div className="flex justify-center h-[250px]">
         <Image
           src={image || ""}
           alt={title || ""}
           width={213}
           height={240}
           priority
-          className="w-[213px] h-[240px] object-contain mb-4 "
+          className="w-[213px] h-[240px] object-contain"
         />
       </div>
       <h2 className="font-bold text-base overflow-hidden line-clamp-2">
