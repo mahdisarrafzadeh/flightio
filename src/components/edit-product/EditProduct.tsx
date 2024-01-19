@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { useSearchParams } from "next/navigation";
 
 import { edit as string } from "@/utils/string";

@@ -31,13 +31,9 @@ const Button: FC<Props> = ({
           "opacity-50 cursor-not-allowed": loading,
         }
       )}
-      onClick={
-        onClick
-          ? () => {
-              onClick();
-            }
-          : () => {}
-      }
+      onClick={() => {
+        onClick && onClick();
+      }}
     >
       <TailSpin
         visible={loading}

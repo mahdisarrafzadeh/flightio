@@ -1,5 +1,8 @@
 export const home = {
-  items: ["ارزان‌ترین", "گران‌‌ترین"],
+  items: [
+    { label: "ارزان‌ترین", value: "cheapest" },
+    { label: "گران‌‌ترین", value: "expensive" },
+  ],
   cheapest: "ارزان‌ترین",
   notFound: "Products Not Fount",
   mony: " تومان",

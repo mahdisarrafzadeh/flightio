@@ -15,17 +15,17 @@ export const metadata: Metadata = {
 const shabnam = localFont({
   src: [
     {
-      path: "../fonts/Shabnam-Light-FD.woff2",
+      path: "../assets/fonts/Shabnam-Light-FD.woff2",
       weight: "400",
       style: "light",
     },
     {
-      path: "../fonts/Shabnam-Medium-FD.woff2",
+      path: "../assets/fonts/Shabnam-Medium-FD.woff2",
       weight: "500",
       style: "normal",
     },
     {
-      path: "../fonts/Shabnam-Bold-FD.woff2",
+      path: "../assets/fonts/Shabnam-Bold-FD.woff2",
       weight: "700",
       style: "bold",
     },

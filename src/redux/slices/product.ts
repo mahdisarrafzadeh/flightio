@@ -1,10 +1,6 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
-import {
-  IFormInput,
-  Product,
-  ProductInitialState,
-} from "@/interfaces/product.interfaces";
+import { ProductInitialState } from "@/interfaces/product.interfaces";
 import {
   deleteProductById,
   retrieveProductById,
@@ -25,22 +21,16 @@ const productSlice = createSlice({
   name: "product",
   initialState,
   reducers: {
-    sortProductsByCheapest: (state) => {
+    sortProducts: (state, action: PayloadAction<string>) => {
+      action.payload;
       state.products &&
         state.products.sort((a, b) => {
           if (a.price && b.price) {
-            return a.price - b.price;
+            return action.payload === "cheapest"
+              ? a.price - b.price
+              : b.price - a.price;
           }
           return a.price ? -1 : b.price ? 1 : 0;
-        });
-    },
-    sortProductsByExpensive: (state) => {
-      state.products &&
-        state.products.sort((a, b) => {
-          if (a.price && b.price) {
-            return b.price - a.price;
-          }
-          return b.price ? -1 : a.price ? 1 : 0;
         });
     },
   },
@@ -90,8 +80,7 @@ const productSlice = createSlice({
   },
 });
 
-export const { sortProductsByCheapest, sortProductsByExpensive } =
-  productSlice.actions;
+export const { sortProducts } = productSlice.actions;
 
 export const selectProduct = (state: RootState) => state.products;
 

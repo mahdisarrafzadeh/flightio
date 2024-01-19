@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, FC } from "react";
+import { useEffect, FC } from "react";
 import Link from "next/link";
 
 import { useAppDispatch, useAppSelector } from "@/hooks";
@@ -28,19 +28,21 @@ const ProductPage: FC<Props> = ({ params }) => {
   if (status !== "succeeded") {
     return <Loading />;
   }
+
   if (!productDetail) {
     return <NotFound text={string.notFound} />;
-  } else
-    return (
-      <>
-        <Link className="mb-3 text-sm font-medium text-default-blue" href={"/"}>
-          {string.back}
-        </Link>
-        <ProductCard />
-        <Confirm productId={productDetail?.id} />
-        <EditProduct productDetail={productDetail} />
-      </>
-    );
+  }
+
+  return (
+    <>
+      <Link className="mb-3 text-sm font-medium text-default-blue" href={"/"}>
+        {string.back}
+      </Link>
+      <ProductCard />
+      <Confirm productId={productDetail?.id} />
+      <EditProduct productDetail={productDetail} />
+    </>
+  );
 };
 
 export default ProductPage;
