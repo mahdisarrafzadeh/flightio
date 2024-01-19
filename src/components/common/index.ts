@@ -3,3 +3,4 @@ export { default as Input } from "./Input";
 export { default as Textarea } from "./Textarea";
 export { default as Loading } from "./Loading";
 export { default as NotFound } from "./NotFound";
+export { default as Rating } from "./Rating";

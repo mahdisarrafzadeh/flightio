@@ -6,6 +6,7 @@ import { selectProduct } from "@/redux/slices/product";
 
 import { productItem as string } from "@/utils/string";
 import ButtonGroup from "./button-group/ButtonGroup";
+import { Rating } from "../common";
 
 const ProductCard: FC = () => {
   const { productDetail } = useAppSelector(selectProduct);
@@ -34,18 +35,10 @@ const ProductCard: FC = () => {
               {productDetail?.title}
             </h2>
             <div className="flex justify-start py-4 items-center gap-3">
-              <div className="flex justify-center items-center  ">
-                <Image
-                  src="/kid_star.svg"
-                  alt="rating"
-                  width={24}
-                  height={24}
-                  className="h-auto w-auto"
-                />
-                <span className="text-default-gray font-normal text-xs pr-2 ">
-                  {productDetail?.rating?.rate}
-                </span>
-              </div>
+              <Rating
+                className="font-normal text-xs pr-1"
+                rating={productDetail?.rating?.rate}
+              />
               <hr className="border h-4  border-default" />
               <span className="text-default-gray font-normal text-xs">
                 {productDetail?.rating?.count &&

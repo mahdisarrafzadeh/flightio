@@ -2,8 +2,9 @@ import { FC } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-import { Product } from "@/interfaces/product.interfaces";
 import { home as string } from "@/utils/string";
+import { Product } from "@/interfaces/product.interfaces";
+import { Rating } from "../common";
 
 interface Props {
   productDetail: Product;
@@ -33,19 +34,7 @@ const ProductItem: FC<Props> = ({ productDetail }) => {
         {title}
       </h2>
       <div className="flex w-full justify-between items-center mt-4">
-        <div className="flex items-center">
-          <Image
-            src="/kid_star.svg"
-            alt="rating"
-            width={24}
-            height={24}
-            priority
-            className="mr-1"
-          />
-          <span className="text-default-gray font-medium text-sm">
-            {rating?.rate}
-          </span>
-        </div>
+        <Rating rating={rating?.rate} />
         <div className="text-default-blue text-lg font-bold">
           {price}
           {string.mony}
