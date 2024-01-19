@@ -12,7 +12,7 @@ const ProductCard: FC = () => {
   const { productDetail } = useAppSelector(selectProduct);
 
   return (
-    <div className=" rounded-[20px] border border-solid border-default p-0 bg-white grid grid-flow-col max-md:grid-flow-row">
+    <div className="mt-2 rounded-[20px] border border-solid border-default p-0 bg-white grid grid-flow-col max-md:grid-flow-row">
       <div className="relative border-solid max-md:border-b md:border-l justify-center items-center h-full py-[50px] px-[72px]">
         <ButtonGroup id={productDetail?.id} />
         <div className="flex h-[400px] max-md:h-[250px] justify-center object-contain pt-6 pb-[26px] items-center ">

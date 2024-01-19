@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, FC } from "react";
+import Link from "next/link";
 
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { selectProduct } from "@/redux/slices/product";
@@ -32,6 +33,9 @@ const ProductPage: FC<Props> = ({ params }) => {
   } else
     return (
       <>
+        <Link className="mb-3 text-sm font-medium text-default-blue" href={"/"}>
+          {string.back}
+        </Link>
         <ProductCard />
         <Confirm productId={productDetail?.id} />
         <EditProduct productDetail={productDetail} />

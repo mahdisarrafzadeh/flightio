@@ -12,6 +12,7 @@ export const productItem = {
   exchange: "تومان",
   payment: "مبلغ قابل پرداخت:",
   notFound: `We're sorry, but we couldn't locate any product with the provided ID.`,
+  back: "بازگشت به صفحه اصلی",
 };
 
 export const confirm = {
