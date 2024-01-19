@@ -2,15 +2,11 @@ import React, { FC } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
+import { buttonGroup as string } from "@/utils/string";
+
 interface Props {
   id?: number;
 }
-
-const string = {
-  count: " تا باقی مانده ",
-  edit: "ویرایش",
-  delete: " حذف محصول",
-};
 
 const ButtonGroup: FC<Props> = ({ id }) => {
   const router = useRouter();

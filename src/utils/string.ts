@@ -34,3 +34,9 @@ export const edit = {
 export const header = {
   name: "مهدی صراف زاده",
 };
+
+export const buttonGroup = {
+  count: " تا باقی مانده ",
+  edit: "ویرایش",
+  delete: " حذف محصول",
+};
