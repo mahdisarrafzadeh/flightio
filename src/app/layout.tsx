@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 
-import "./globals.css";
 import StoreProvider from "./StoreProvider";
 import { Toaster } from "react-hot-toast";
 import Header from "@/components/header";
+
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Next Ecommerce App",
