@@ -7,7 +7,7 @@ import { retrieveProducts } from "@/redux/slices/service";
 
 import { home as string } from "@/utils/string";
 import { Loading, NotFound } from "../common";
-import ProductItem from "./ProductItem";
+import ProductItem from "./product-item";
 
 const ProductContainer: FC = () => {
   const { products, status } = useAppSelector(selectProduct);

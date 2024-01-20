@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 
 import { home as string } from "@/utils/string";
 import { Product } from "@/interfaces/product.interfaces";
-import { Rating } from "../common";
+import { Rating } from "../../common";
 
 interface Props {
   productDetail: Product;

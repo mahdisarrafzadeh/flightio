@@ -1,7 +1,7 @@
 "use client";
 
+import ProductContainer from "@/components/product-container";
 import Tabs from "@/components/tabs";
-import ProductContainer from "@/components/product-item/ProductContainer";
 
 export default function Home() {
   return (
